@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facturation Électronique 2026 — Expert Conformité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:   #f5f2ed;
+  --cream2:  #ede9e2;
+  --white:   #faf9f7;
+  --sage:    #2d5a4e;
+  --sage-mid:#3d7060;
+  --sage-lt: #e8f0ee;
+  --sage-xlt:#f0f5f3;
+  --terra:   #b5704a;
+  --terra-lt:#f5ede8;
+  --charcoal:#1e2b28;
+  --text:    #3d4a45;
+  --muted:   #7a8f89;
+  --border:  #d5cfc6;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--charcoal);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(250,249,247,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 4rem;
+}
+.nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  background: var(--sage);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 0.85rem; font-weight: 600;
+}
+.nav-logo-text { font-family: 'Lora', serif; font-size: 1rem; color: var(--charcoal); line-height: 1.2; }
+.nav-logo-text span { display: block; font-size: 0.68rem; color: var(--muted); font-family: 'Outfit', sans-serif; letter-spacing: 0.07em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-link { font-size: 0.88rem; color: var(--text); text-decoration: none; transition: color 0.2s; }
+.nav-link:hover { color: var(--sage); }
+.nav-cta {
+  background: var(--sage); color: white;
+  font-size: 0.84rem; font-weight: 500;
+  padding: 0.65rem 1.5rem; text-decoration: none;
+  transition: background 0.2s, transform 0.2s; border-radius: 2px;
+}
+.nav-cta:hover { background: var(--sage-mid); transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  align-items: center; padding: 8rem 4rem 5rem; gap: 5rem;
+  position: relative; background: var(--white);
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -10%; right: -5%;
+  width: 55%; height: 110%;
+  background: var(--sage-xlt);
+  border-radius: 40% 0 0 50% / 50% 0 0 50%;
+  z-index: 0;
+}
+.hero-left, .hero-right { position: relative; z-index: 2; }
+
+.author-intro {
+  display: flex; align-items: center; gap: 0.9rem;
+  margin-bottom: 1.6rem;
+}
+.author-avatar {
+  width: 46px; height: 46px; flex-shrink: 0;
+  background: var(--sage); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600; color: white;
+}
+.author-name {
+  font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; color: var(--charcoal);
+}
+.author-qual {
+  font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.4;
+}
+
+.deadline-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--terra-lt); border: 1px solid rgba(181,112,74,0.25);
+  color: var(--terra); font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.4rem 0.9rem; border-radius: 20px; margin-bottom: 2rem;
+}
+.chip-dot {
+  width: 7px; height: 7px; background: var(--terra);
+  border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.6} }
+
+.hero h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  line-height: 1.15; color: var(--charcoal);
+  margin-bottom: 1.5rem; letter-spacing: -0.02em; font-weight: 600;
+}
+.hero h1 em { font-style: italic; color: var(--sage); }
+.hero-sub {
+  font-size: 1.05rem; line-height: 1.75; color: var(--text);
+  max-width: 480px; margin-bottom: 2.5rem; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+.btn-primary {
+  background: var(--sage); color: white; font-size: 0.9rem; font-weight: 500;
+  padding: 0.9rem 2rem; text-decoration: none; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.btn-primary:hover { background: var(--sage-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,90,78,0.2); }
+.btn-secondary {
+  border: 1.5px solid var(--border); color: var(--text); font-size: 0.9rem;
+  padding: 0.9rem 1.8rem; text-decoration: none; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 0.5rem; transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--sage); color: var(--sage); }
+
+.trust-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; color: var(--muted); }
+.trust-icon { color: var(--sage); }
+
+/* COUNTDOWN CARD */
+.countdown-card {
+  background: white; border: 1px solid var(--border); border-radius: 4px;
+  padding: 2.2rem; box-shadow: 0 4px 30px rgba(30,43,40,0.07), 0 1px 4px rgba(30,43,40,0.04);
+  position: relative;
+}
+.countdown-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 2rem; right: 2rem; height: 3px;
+  background: linear-gradient(90deg, var(--sage), var(--sage-mid));
+  border-radius: 0 0 2px 2px;
+}
+.cd-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.cd-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; }
+.cd-badge { background: var(--terra-lt); color: var(--terra); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+.cd-grid {
+  display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: end; margin-bottom: 1.5rem; gap: 0.2rem;
+}
+.cd-unit { text-align: center; }
+.cd-num { font-family: 'Lora', serif; font-size: 2.6rem; color: var(--sage); line-height: 1; display: block; font-weight: 600; }
+.cd-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 0.35rem; display: block; }
+.cd-colon { font-family: 'Lora', serif; font-size: 2rem; color: var(--border); padding-bottom: 0.8rem; display: flex; align-items: flex-end; }
+.cd-desc {
+  background: var(--sage-xlt); border-left: 3px solid var(--sage);
+  padding: 0.9rem 1rem; font-size: 0.84rem; color: var(--text);
+  line-height: 1.55; border-radius: 0 2px 2px 0;
+}
+.cd-desc strong { color: var(--sage); font-weight: 600; }
+
+/* STATS */
+.stats-strip {
+  background: var(--sage); padding: 2.5rem 4rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;
+}
+.stat-num { font-family: 'Lora', serif; font-size: 2.6rem; color: white; font-weight: 600; line-height: 1; margin-bottom: 0.4rem; display: block; }
+.stat-num em { font-style: normal; color: rgba(255,255,255,0.5); font-size: 1.6rem; }
+.stat-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.4; }
+
+/* SECTION UTILS */
+.section-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--sage); font-weight: 600; margin-bottom: 1rem;
+}
+.section-tag::before { content: ''; width: 20px; height: 2px; background: var(--sage); display: block; }
+.section-h { font-family: 'Lora', serif; font-size: clamp(1.9rem, 3.5vw, 2.8rem); line-height: 1.2; color: var(--charcoal); margin-bottom: 1rem; font-weight: 600; }
+.section-h em { font-style: italic; color: var(--sage); }
+.section-p { font-size: 1rem; line-height: 1.75; color: var(--text); font-weight: 300; max-width: 540px; }
+
+/* CONTEXT */
+.context {
+  padding: 7rem 4rem; background: var(--cream);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+}
+.timeline { display: flex; flex-direction: column; }
+.tl-item {
+  display: flex; gap: 1.5rem;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.tl-item.vis { opacity: 1; transform: translateY(0); }
+.tl-item:nth-child(2) { transition-delay: 0.15s; }
+.tl-item:nth-child(3) { transition-delay: 0.3s; }
+.tl-spine { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.tl-circle { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.tl-line { width: 2px; flex: 1; min-height: 40px; }
+.tl-item:last-child .tl-line { display: none; }
+.tl-item.past .tl-circle { background: var(--border); }
+.tl-item.past .tl-line   { background: var(--border); }
+.tl-item.now  .tl-circle { background: var(--sage); box-shadow: 0 0 0 4px rgba(45,90,78,0.15); }
+.tl-item.now  .tl-line   { background: var(--border); }
+.tl-item.fut  .tl-circle { background: var(--cream2); border: 2px solid var(--border); }
+.tl-body { padding-bottom: 2.5rem; }
+.tl-date { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.35rem; }
+.tl-item.past .tl-date { color: var(--muted); }
+.tl-item.now  .tl-date { color: var(--sage); }
+.tl-item.fut  .tl-date { color: var(--terra); }
+.tl-text { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+.tl-highlight { display: inline-block; background: var(--sage-lt); color: var(--sage); font-size: 0.78rem; font-weight: 500; padding: 0.2rem 0.6rem; border-radius: 2px; margin-top: 0.4rem; }
+
+/* SERVICES */
+.services { padding: 7rem 4rem; background: var(--white); }
+.services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+
+/* Offre cards — layout vertical 4 étapes */
+.offres-list { display: flex; flex-direction: column; gap: 2rem; }
+
+.offre-card {
+  border: 1px solid var(--border); border-radius: 4px;
+  background: var(--white); overflow: hidden;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.3s, box-shadow 0.3s;
+}
+.offre-card.vis { opacity: 1; transform: translateY(0); }
+.offre-card:nth-child(2){transition-delay:.1s}
+.offre-card:nth-child(3){transition-delay:.2s}
+.offre-card:nth-child(4){transition-delay:.3s}
+.offre-card:hover { border-color: var(--sage); box-shadow: 0 8px 32px rgba(45,90,78,0.08); }
+
+.offre-header {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.8rem 2rem;
+  background: var(--white);
+  cursor: default;
+}
+.offre-step {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: var(--sage-lt); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Lora', serif; font-size: 1rem; font-weight: 600; color: var(--sage);
+}
+.offre-card.gratuit .offre-step { background: var(--terra-lt); color: var(--terra); }
+
+.offre-meta { flex: 1; }
+.offre-label {
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); margin-bottom: 0.2rem; font-weight: 500;
+}
+.offre-title { font-family: 'Lora', serif; font-size: 1.15rem; color: var(--charcoal); font-weight: 600; }
+
+.offre-price-tag {
+  text-align: right; flex-shrink: 0;
+}
+.price-num { font-family: 'Lora', serif; font-size: 1.4rem; font-weight: 600; color: var(--sage); display: block; line-height: 1; }
+.price-free { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600; color: var(--terra); display: block; }
+.price-ht { font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem; display: block; }
+
+.offre-body {
+  border-top: 1px solid var(--border);
+  padding: 1.6rem 2rem;
+  background: var(--sage-xlt);
+}
+.offre-desc { font-size: 0.9rem; color: var(--text); line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem; }
+
+/* Sub-séances dans l'accompagnement */
+.seances { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.4rem; }
+.seance {
+  display: flex; gap: 1rem; align-items: flex-start;
+  background: white; border: 1px solid var(--border); border-radius: 3px; padding: 1rem 1.2rem;
+}
+.seance-dot {
+  width: 26px; height: 26px; flex-shrink: 0;
+  background: var(--sage); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 600; color: white; margin-top: 1px;
+}
+.seance-content {}
+.seance-title { font-size: 0.88rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.25rem; }
+.seance-text { font-size: 0.82rem; color: var(--text); line-height: 1.55; font-weight: 300; }
+.seance-price { font-size: 0.78rem; color: var(--sage); font-weight: 600; margin-top: 0.3rem; }
+
+.offre-cta-btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.75rem 1.5rem; border-radius: 2px;
+  font-size: 0.86rem; font-weight: 500; cursor: pointer;
+  border: none; font-family: 'Outfit', sans-serif;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.offre-cta-btn.primary { background: var(--sage); color: white; }
+.offre-cta-btn.primary:hover { background: var(--sage-mid); transform: translateY(-1px); }
+.offre-cta-btn.terra { background: var(--terra); color: white; }
+.offre-cta-btn.terra:hover { background: #a05e3c; transform: translateY(-1px); }
+
+/* MODAL FORMULAIRE */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(30,43,40,0.55); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: white; border-radius: 4px; padding: 2.5rem;
+  max-width: 540px; width: 100%;
+  box-shadow: 0 24px 60px rgba(30,43,40,0.18);
+  position: relative; animation: modal-in 0.3s ease;
+}
+@keyframes modal-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+.modal-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  width: 32px; height: 32px; background: var(--cream); border: none; border-radius: 50%;
+  cursor: pointer; font-size: 1rem; color: var(--muted); display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: var(--cream2); }
+.modal-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--terra); font-weight: 600; margin-bottom: 0.4rem; }
+.modal-title { font-family: 'Lora', serif; font-size: 1.4rem; color: var(--charcoal); font-weight: 600; margin-bottom: 0.4rem; }
+.modal-sub { font-size: 0.87rem; color: var(--text); line-height: 1.6; margin-bottom: 1.8rem; font-weight: 300; }
+
+/* Réutilisation des styles form déjà définis */
+.modal-success { display:none; text-align:center; padding: 1rem 0; }
+.modal-success-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.modal-success h3 { font-family: 'Lora', serif; font-size: 1.3rem; color: var(--sage); margin-bottom: 0.5rem; }
+.modal-success p { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+
+/* EXPERTISE */
+.expertise {
+  padding: 7rem 4rem; background: var(--sage);
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center;
+}
+.expertise .section-tag { color: rgba(255,255,255,0.55); }
+.expertise .section-tag::before { background: rgba(255,255,255,0.4); }
+.expertise .section-h { color: white; }
+.expertise .section-p { color: rgba(255,255,255,0.7); }
+.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.1); }
+.exp-item {
+  background: rgba(255,255,255,0.05); padding: 1.8rem;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.5s, background 0.3s;
+}
+.exp-item.vis { opacity: 1; transform: translateY(0); }
+.exp-item:nth-child(2){transition-delay:.1s}.exp-item:nth-child(3){transition-delay:.2s}
+.exp-item:nth-child(4){transition-delay:.3s}.exp-item:nth-child(5){transition-delay:.4s}
+.exp-item:last-child { grid-column: 1/-1; }
+.exp-item:hover { background: rgba(255,255,255,0.1); }
+.exp-icon { font-size: 1.3rem; margin-bottom: 0.7rem; display: block; }
+.exp-title { font-size: 0.88rem; font-weight: 600; color: white; margin-bottom: 0.4rem; }
+.exp-text { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.6; font-weight: 300; }
+
+/* REASSURANCE */
+.reassurance {
+  padding: 5rem 4rem; background: var(--cream);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;
+}
+.reas-item { padding: 1rem; opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+.reas-item.vis { opacity: 1; transform: none; }
+.reas-item:nth-child(2){transition-delay:.12s}.reas-item:nth-child(3){transition-delay:.24s}
+.reas-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.reas-title { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--charcoal); margin-bottom: 0.5rem; font-weight: 600; }
+.reas-text { font-size: 0.85rem; color: var(--text); line-height: 1.65; font-weight: 300; }
+
+/* CTA */
+.cta {
+  padding: 8rem 4rem; background: var(--white);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+}
+.contact-card {
+  background: var(--sage-xlt); border: 1px solid rgba(45,90,78,0.15);
+  border-radius: 4px; padding: 2.5rem;
+}
+.contact-card h3 { font-family: 'Lora', serif; font-size: 1.3rem; color: var(--charcoal); margin-bottom: 0.5rem; }
+.contact-card p { font-size: 0.9rem; color: var(--text); line-height: 1.6; margin-bottom: 1.8rem; font-weight: 300; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label { font-size: 0.78rem; font-weight: 500; color: var(--text); letter-spacing: 0.04em; }
+.form-input {
+  padding: 0.75rem 1rem; border: 1px solid var(--border);
+  background: white; font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+  color: var(--charcoal); border-radius: 2px; transition: border-color 0.2s; outline: none; width: 100%;
+}
+.form-input:focus { border-color: var(--sage); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-select {
+  padding: 0.75rem 1rem; border: 1px solid var(--border);
+  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8f89' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: var(--charcoal);
+  border-radius: 2px; outline: none; width: 100%; cursor: pointer;
+  transition: border-color 0.2s; appearance: none;
+}
+.form-select:focus { border-color: var(--sage); }
+.form-submit {
+  background: var(--sage); color: white; border: none;
+  padding: 0.9rem 2rem; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 500;
+  cursor: pointer; border-radius: 2px; transition: background 0.2s, transform 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;
+}
+.form-submit:hover { background: var(--sage-mid); transform: translateY(-1px); }
+.privacy-note { font-size: 0.73rem; color: var(--muted); text-align: center; margin-top: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem; }
+
+/* FOOTER */
+footer {
+  background: var(--charcoal); padding: 2.5rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-family: 'Lora', serif; color: white; font-size: 1rem; }
+.footer-sub { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 0.2rem; }
+.footer-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+
+/* CLASSEUR ETI / PME */
+.classeur {
+  border: 1px solid var(--border); border-radius: 3px;
+  overflow: hidden; margin: 1.4rem 0 1.4rem;
+  background: white;
+}
+.classeur-tabs {
+  display: flex; border-bottom: 1px solid var(--border);
+  background: var(--cream);
+}
+.classeur-tab {
+  flex: 1; padding: 0.75rem 1rem;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 500;
+  color: var(--muted); transition: color 0.2s, background 0.2s;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+}
+.classeur-tab.active { color: var(--sage); border-bottom-color: var(--sage); background: white; }
+.classeur-tab:not(.active):hover { color: var(--text); background: var(--cream2); }
+
+.classeur-panel { display: none; padding: 1.5rem; }
+.classeur-panel.active { display: block; }
+
+.classeur-badge {
+  display: inline-flex; align-items: center;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2px;
+  margin-bottom: 1rem;
+}
+.classeur-badge.eti { background: var(--sage-lt); color: var(--sage); }
+.classeur-badge.pme { background: var(--terra-lt); color: var(--terra); }
+
+.classeur-text { font-size: 0.88rem; color: var(--text); line-height: 1.65; font-weight: 300; margin-bottom: 1.1rem; }
+
+.classeur-include {
+  display: flex; gap: 1rem; align-items: flex-start;
+  background: var(--sage-xlt); border: 1px solid rgba(45,90,78,0.15);
+  border-radius: 3px; padding: 1rem 1.1rem; margin-bottom: 1.3rem;
+}
+.classeur-include.devis {
+  background: var(--terra-lt); border-color: rgba(181,112,74,0.2);
+}
+.ci-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+.ci-title { font-size: 0.85rem; font-weight: 600; color: var(--charcoal); margin-bottom: 0.25rem; }
+.ci-text { font-size: 0.8rem; color: var(--text); line-height: 1.55; font-weight: 300; }
+
+.classeur-price-row {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.classeur-price-free {
+  font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 600; color: var(--terra);
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
+  .hero::before { display: none; }
+  .stats-strip { grid-template-columns: 1fr 1fr; padding: 2.5rem 1.5rem; }
+  .context, .expertise, .cta { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  .services { padding: 4rem 1.5rem; }
+  .services-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .offre-header { flex-wrap: wrap; gap: 1rem; }
+  .offre-price-tag { text-align: left; }
+  .reassurance { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .exp-item:last-child { grid-column: auto; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  .modal-box { padding: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">FE</div>
+    <div class="nav-logo-text">Expert Conformité<span>Facturation Électronique</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#contexte" class="nav-link">Contexte</a>
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#expertise" class="nav-link">Expertise</a>
+    <a href="#contact" class="nav-cta">Diagnostic gratuit</a>
+  </div>
+</nav>
+
+<section class="hero" id="accueil">
+  <div class="hero-left">
+    <div class="author-intro">
+      <div class="author-avatar">A</div>
+      <div class="author-info">
+        <div class="author-name">Alexandre</div>
+        <div class="author-qual">Expert en organisation métier · Accompagnant à la transformation digitale</div>
+      </div>
+    </div>
+    <div class="deadline-chip"><span class="chip-dot"></span>Obligation légale · 1er septembre 2026</div>
+    <h1>Votre entreprise<br><em>prête à temps</em><br>pour la facture<br>électronique</h1>
+    <p class="hero-sub">La réforme de la facturation électronique est inévitable. Je vous accompagne de l'audit initial au déploiement complet, pour une conformité sereine et sans mauvaise surprise.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Demander un diagnostic gratuit →</a>
+      <a href="#services" class="btn-secondary">Voir mes services</a>
+    </div>
+    <div class="trust-row">
+      <span class="trust-item"><span class="trust-icon">✓</span> Accompagnement sur-mesure</span>
+      <span class="trust-item"><span class="trust-icon">✓</span> Expertise DGFiP</span>
+      <span class="trust-item"><span class="trust-icon">✓</span> Zéro jargon technique</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="countdown-card">
+      <div class="cd-header">
+        <span class="cd-title">⏱ Temps restant avant la deadline</span>
+        <span class="cd-badge">Urgent</span>
+      </div>
+      <div class="cd-grid">
+        <div class="cd-unit"><span class="cd-num" id="cdD">—</span><span class="cd-lbl">Jours</span></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><span class="cd-num" id="cdH">—</span><span class="cd-lbl">Heures</span></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><span class="cd-num" id="cdM">—</span><span class="cd-lbl">Min.</span></div>
+        <div class="cd-colon">:</div>
+        <div class="cd-unit"><span class="cd-num" id="cdS">—</span><span class="cd-lbl">Sec.</span></div>
+      </div>
+      <div class="cd-desc"><strong>1er septembre 2026 :</strong> toutes les entreprises assujetties à la TVA devront recevoir leurs factures via une PA ou le PPF agréé. La mise en conformité prend en moyenne <strong>3 à 6 mois</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div><span class="stat-num">4<em>M</em></span><div class="stat-desc">entreprises françaises<br>concernées par la réforme</div></div>
+  <div><span class="stat-num">1<em>er</em></span><div class="stat-desc">septembre 2026<br>deadline réception obligatoire</div></div>
+  <div><span class="stat-num">3<em>–6</em></span><div class="stat-desc">mois nécessaires en moyenne<br>pour se conformer</div></div>
+  <div><span class="stat-num">0</span><div class="stat-desc">pénalité pour mes clients<br>accompagnés à temps</div></div>
+</div>
+
+<section class="context" id="contexte">
+  <div>
+    <p class="section-tag">Le calendrier réglementaire</p>
+    <h2 class="section-h">Une réforme <em>progressive</em>, une deadline ferme</h2>
+    <p class="section-p">Issue de la loi de finances 2024, cette obligation concerne l'ensemble des entreprises françaises soumises à la TVA. Le PPF et les PA agréées doivent être opérationnels dans vos processus.</p>
+    <br>
+    <p class="section-p">La DGFiP est claire : pas de dérogation après la deadline. Anticiper, c'est protéger votre activité.</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item past">
+      <div class="tl-spine"><div class="tl-circle"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-date">2024 — En cours</div>
+        <div class="tl-text">Publication des spécifications DGFiP, agrément des premières PA. Période de préparation pour toutes les entreprises.</div>
+      </div>
+    </div>
+    <div class="tl-item now">
+      <div class="tl-spine"><div class="tl-circle"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-date">1er septembre 2026 — Votre deadline</div>
+        <div class="tl-text">Obligation de réception pour toutes les entreprises. Votre système doit être raccordé à une PA agréée ou au PPF.</div>
+        <span class="tl-highlight">↑ Vous devez être prêt à cette date</span>
+      </div>
+    </div>
+    <div class="tl-item fut">
+      <div class="tl-spine"><div class="tl-circle"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-date">Post-2026 — Contrôles DGFiP</div>
+        <div class="tl-text">Vérifications de conformité, amendes et sanctions possibles, perturbations des relations fournisseurs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-intro">
+    <div>
+      <p class="section-tag">Mon accompagnement</p>
+      <h2 class="section-h">4 étapes pour une <em>conformité sereine</em></h2>
+    </div>
+    <p class="section-p">Un parcours structuré, progressif et transparent — du premier échange jusqu'à la vérification finale de la mise en conformité de votre entreprise.</p>
+  </div>
+
+  <div class="offres-list">
+
+    <!-- ÉTAPE 1 : Diagnostic gratuit -->
+    <div class="offre-card gratuit">
+      <div class="offre-header">
+        <div class="offre-step">1</div>
+        <div class="offre-meta">
+          <div class="offre-label">Point de départ</div>
+          <div class="offre-title">Rendez-vous de diagnostic initial</div>
+        </div>
+        <div class="offre-price-tag">
+          <span class="price-free">Gratuit</span>
+          <span class="price-ht">sans engagement</span>
+        </div>
+      </div>
+      <div class="offre-body">
+        <p class="offre-desc">Un premier échange pour faire le point ensemble : structure de votre entreprise, fonctionnement des services, ce qui a déjà été mis en place. L'objectif est de cerner précisément votre situation avant toute préconisation, sans jargon et sans pression commerciale.</p>
+        <p class="offre-desc"><strong style="color:var(--charcoal)">Ce que nous abordons :</strong> organisation interne, flux de facturation existants, outils utilisés, calendrier disponible, niveau d'urgence.</p>
+
+        <!-- Classeur ETI / PME -->
+        <div class="classeur">
+          <div class="classeur-tabs">
+            <button class="classeur-tab active" onclick="switchTab(this, 'c1-eti')">🏢 ETI</button>
+            <button class="classeur-tab" onclick="switchTab(this, 'c1-pme')">🏬 PME</button>
+          </div>
+          <div class="classeur-panel active" id="c1-eti">
+            <div class="classeur-badge eti">ETI — Entreprise de Taille Intermédiaire</div>
+            <p class="classeur-text">Le diagnostic initial est <strong>inclus sans frais</strong>. Lors de ce rendez-vous, nous établissons ensemble une cartographie complète de votre organisation : services concernés, volumes de facturation, SI existant et contraintes spécifiques aux ETI (multi-sites, multi-entités, ERP complexe).</p>
+            <div class="classeur-include">
+              <span class="ci-icon">📁</span>
+              <div>
+                <div class="ci-title">Classeur de diagnostic ETI inclus</div>
+                <div class="ci-text">À l'issue du rendez-vous, vous recevez un document structuré récapitulant l'état des lieux, les points de vigilance et les recommandations prioritaires pour votre structure.</div>
+              </div>
+            </div>
+            <div class="classeur-price-row">
+              <span class="classeur-price-free">Gratuit</span>
+              <button class="offre-cta-btn terra" onclick="openModal()">📅 Prendre rendez-vous</button>
+            </div>
+          </div>
+          <div class="classeur-panel" id="c1-pme">
+            <div class="classeur-badge pme">PME — Petite & Moyenne Entreprise</div>
+            <p class="classeur-text">Le rendez-vous de diagnostic est également <strong>gratuit pour les PME</strong>. Nous faisons le point sur vos pratiques actuelles, votre logiciel comptable, et vos contraintes budgétaires pour définir ensemble l'approche la plus adaptée à votre taille.</p>
+            <div class="classeur-include devis">
+              <span class="ci-icon">💬</span>
+              <div>
+                <div class="ci-title">Accompagnement post-diagnostic : sur devis</div>
+                <div class="ci-text">La suite de l'accompagnement est personnalisée selon vos besoins réels. Un devis détaillé vous est remis à l'issue du diagnostic, sans engagement de votre part.</div>
+              </div>
+            </div>
+            <div class="classeur-price-row">
+              <span class="classeur-price-free">Gratuit</span>
+              <button class="offre-cta-btn terra" onclick="openModal()">📅 Prendre rendez-vous</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 2 : Accompagnement au changement -->
+    <div class="offre-card">
+      <div class="offre-header">
+        <div class="offre-step">2</div>
+        <div class="offre-meta">
+          <div class="offre-label">Accompagnement au changement</div>
+          <div class="offre-title">Sensibilisation & cartographie des parties prenantes</div>
+        </div>
+        <div class="offre-price-tag">
+          <span class="price-num">998 €</span>
+          <span class="price-ht">HT · ETI · 2 séances</span>
+        </div>
+      </div>
+      <div class="offre-body">
+        <p class="offre-desc">Deux rendez-vous structurés pour poser les fondations humaines et organisationnelles du projet. Parce que la conformité ne se décrète pas — elle s'accompagne.</p>
+
+        <!-- Classeur ETI / PME -->
+        <div class="classeur">
+          <div class="classeur-tabs">
+            <button class="classeur-tab active" onclick="switchTab(this, 'c2-eti')">🏢 ETI</button>
+            <button class="classeur-tab" onclick="switchTab(this, 'c2-pme')">🏬 PME</button>
+          </div>
+
+          <div class="classeur-panel active" id="c2-eti">
+            <div class="classeur-badge eti">ETI — Tarif fixe · 998 € HT</div>
+            <div class="seances">
+              <div class="seance">
+                <div class="seance-dot">1</div>
+                <div class="seance-content">
+                  <div class="seance-title">Présentation de la réforme & enjeux pour votre entreprise</div>
+                  <div class="seance-text">Décryptage de l'obligation réglementaire dans le contexte spécifique de votre activité. Comprendre ce qui change, ce que cela implique concrètement, et ce qu'il faut anticiper.</div>
+                  <div class="seance-price">499 € HT</div>
+                </div>
+              </div>
+              <div class="seance">
+                <div class="seance-dot">2</div>
+                <div class="seance-content">
+                  <div class="seance-title">Recensement des parties prenantes & plan d'action</div>
+                  <div class="seance-text">Identification de toutes les personnes impliquées (comptabilité, achats, IT, direction…), réunion collective autour des évolutions réglementaires, co-construction du plan d'action et évaluation de la faisabilité.</div>
+                  <div class="seance-price">499 € HT</div>
+                </div>
+              </div>
+            </div>
+            <div class="classeur-include" style="margin-bottom:1.2rem">
+              <span class="ci-icon">📁</span>
+              <div>
+                <div class="ci-title">Classeur de pilotage ETI inclus</div>
+                <div class="ci-text">Livrable remis à l'issue des deux séances : compte-rendu structuré, liste des parties prenantes, plan d'action priorisé et matrice de faisabilité.</div>
+              </div>
+            </div>
+            <a href="#contact" class="offre-cta-btn primary">Démarrer l'accompagnement →</a>
+          </div>
+
+          <div class="classeur-panel" id="c2-pme">
+            <div class="classeur-badge pme">PME — Accompagnement sur devis</div>
+            <p class="classeur-text" style="margin-bottom:1.2rem">Pour les PME, l'accompagnement au changement est adapté à votre taille et à votre budget. Le contenu des deux séances reste identique, mais le tarif est établi sur devis selon votre effectif, votre secteur et la complexité de votre organisation.</p>
+            <div class="seances" style="margin-bottom:1.2rem">
+              <div class="seance">
+                <div class="seance-dot">1</div>
+                <div class="seance-content">
+                  <div class="seance-title">Présentation de la réforme & enjeux</div>
+                  <div class="seance-text">Même contenu qu'en ETI, adapté à l'échelle de votre entreprise et à vos ressources internes disponibles.</div>
+                  <div class="seance-price" style="color:var(--muted)">Inclus dans le devis</div>
+                </div>
+              </div>
+              <div class="seance">
+                <div class="seance-dot">2</div>
+                <div class="seance-content">
+                  <div class="seance-title">Parties prenantes & plan d'action</div>
+                  <div class="seance-text">Cartographie simplifiée et plan d'action pragmatique, calibré pour une PME avec des ressources limitées.</div>
+                  <div class="seance-price" style="color:var(--muted)">Inclus dans le devis</div>
+                </div>
+              </div>
+            </div>
+            <div class="classeur-include devis" style="margin-bottom:1.2rem">
+              <span class="ci-icon">💬</span>
+              <div>
+                <div class="ci-title">Devis personnalisé remis sous 48h</div>
+                <div class="ci-text">Après le diagnostic gratuit (étape 1), je vous adresse une proposition tarifaire détaillée et ajustée à votre situation réelle.</div>
+              </div>
+            </div>
+            <a href="#contact" class="offre-cta-btn primary">Demander un devis gratuit →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3 : Mise en place -->
+    <div class="offre-card">
+      <div class="offre-header">
+        <div class="offre-step">3</div>
+        <div class="offre-meta">
+          <div class="offre-label">Déploiement opérationnel</div>
+          <div class="offre-title">Mise en place & suivi jusqu'à la conformité</div>
+        </div>
+        <div class="offre-price-tag">
+          <span class="price-num" style="font-size:1rem; color:var(--muted)">Sur devis</span>
+          <span class="price-ht">en fonction de la taille et du besoin</span>
+        </div>
+      </div>
+      <div class="offre-body">
+        <p class="offre-desc">Suite logique du plan d'action défini à l'étape précédente. Je pilote le déploiement de votre solution de facturation électronique de bout en bout, jusqu'à la vérification de la bonne réalisation. Vous n'avancez pas à l'aveugle — chaque étape est validée ensemble.</p>
+        <div class="seances" style="margin-bottom:1.4rem">
+          <div class="seance">
+            <div class="seance-dot">✦</div>
+            <div class="seance-content">
+              <div class="seance-title">Choix & intégration de la PA agréée</div>
+              <div class="seance-text">Sélection de la plateforme adaptée, raccordement à votre ERP ou logiciel comptable (SAP, Sage, Cegid, Odoo…), validation des formats (Factur-X, UBL, CII).</div>
+            </div>
+          </div>
+          <div class="seance">
+            <div class="seance-dot">✦</div>
+            <div class="seance-content">
+              <div class="seance-title">Tests & recette finale</div>
+              <div class="seance-text">Vérification end-to-end de la chaîne de facturation, validation de la conformité réglementaire et signature du procès-verbal de mise en service.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#contact" class="offre-cta-btn primary">Demander un devis →</a>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 4 : Formation des équipes -->
+    <div class="offre-card">
+      <div class="offre-header">
+        <div class="offre-step">4</div>
+        <div class="offre-meta">
+          <div class="offre-label">Formation</div>
+          <div class="offre-title">Formation des équipes à la facturation électronique</div>
+        </div>
+        <div class="offre-price-tag">
+          <span class="price-num" style="font-size:1rem; color:var(--muted)">Sur devis</span>
+          <span class="price-ht">en fonction de la taille et du besoin</span>
+        </div>
+      </div>
+      <div class="offre-body">
+        <p class="offre-desc">La conformité technique ne suffit pas si vos équipes ne savent pas utiliser les nouveaux outils au quotidien. Cette étape dédiée garantit une adoption réelle et durable dans votre organisation.</p>
+        <div class="seances" style="margin-bottom:1.4rem">
+          <div class="seance">
+            <div class="seance-dot">✦</div>
+            <div class="seance-content">
+              <div class="seance-title">Ateliers pratiques par métier</div>
+              <div class="seance-text">Sessions adaptées par profil : comptabilité, achats, direction financière. Chaque équipe apprend ce qui la concerne directement, dans un format concret et opérationnel.</div>
+            </div>
+          </div>
+          <div class="seance">
+            <div class="seance-dot">✦</div>
+            <div class="seance-content">
+              <div class="seance-title">Documentation des nouveaux processus</div>
+              <div class="seance-text">Remise de guides utilisateurs clairs et accessibles, adaptés à votre plateforme et à votre organisation interne. Un support durable pour les nouvelles recrues.</div>
+            </div>
+          </div>
+          <div class="seance">
+            <div class="seance-dot">✦</div>
+            <div class="seance-content">
+              <div class="seance-title">Suivi post-formation</div>
+              <div class="seance-text">Une session de questions/réponses à J+30 pour lever les doutes apparus après la mise en production et ajuster si nécessaire.</div>
+            </div>
+          </div>
+        </div>
+        <a href="#contact" class="offre-cta-btn primary">Demander un devis →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL FORMULAIRE DIAGNOSTIC -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div id="modalForm">
+      <div class="modal-tag">Étape 1 — Gratuit & sans engagement</div>
+      <div class="modal-title">Demande de rendez-vous diagnostic</div>
+      <div class="modal-sub">Je vous recontacte sous 24h ouvrées pour fixer un créneau à votre convenance. Aucun engagement, aucune facturation.</div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">N° SIREN *</label>
+            <input type="text" class="form-input" placeholder="123 456 789" maxlength="11">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Raison sociale *</label>
+            <input type="text" class="form-input" placeholder="Acme SAS">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nom du dirigeant *</label>
+          <input type="text" class="form-input" placeholder="Jean Dupont">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email professionnel *</label>
+          <input type="email" class="form-input" placeholder="jean.dupont@entreprise.fr">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <input type="tel" class="form-input" placeholder="06 00 00 00 00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Niveau d'urgence *</label>
+          <select class="form-select">
+            <option value="">— Sélectionner —</option>
+            <option>🟢 Serein — J'anticipe, j'ai le temps</option>
+            <option>🟡 Modéré — Je dois m'organiser rapidement</option>
+            <option>🟠 Urgent — Je n'ai pas encore commencé</option>
+            <option>🔴 Critique — La deadline est très proche</option>
+          </select>
+        </div>
+        <button class="form-submit" onclick="submitModal()">Envoyer ma demande →</button>
+        <div class="privacy-note">🔒 Informations confidentielles — aucun démarchage commercial</div>
+      </div>
+    </div>
+
+    <div class="modal-success" id="modalSuccess">
+      <span class="modal-success-icon">✅</span>
+      <h3>Demande envoyée !</h3>
+      <p>Merci pour votre demande. Je vous recontacte sous <strong>24h ouvrées</strong> pour convenir d'un créneau de rendez-vous.<br><br>À très bientôt.</p>
+    </div>
+  </div>
+</div>
+
+<section class="expertise" id="expertise">
+  <div>
+    <p class="section-tag">Mon expertise</p>
+    <h2 class="section-h">Des compétences <em>précises</em> à votre service</h2>
+    <p class="section-p">Une maîtrise technique et réglementaire acquise sur le terrain, au contact de PME, ETI et grandes entreprises françaises.</p>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-item"><span class="exp-icon">⚖️</span><div class="exp-title">Réglementation DGFiP</div><p class="exp-text">Ordonnance 2021-1190, loi de finances 2024, spécifications du PPF. Cadre légal maîtrisé dans ses moindres détails.</p></div>
+    <div class="exp-item"><span class="exp-icon">🔗</span><div class="exp-title">Plateformes PA agréées</div><p class="exp-text">Connaissance des principaux opérateurs (Chorus Pro, Generix, Yooz, Esker…) et critères d'évaluation objectifs.</p></div>
+    <div class="exp-item"><span class="exp-icon">📋</span><div class="exp-title">Formats Factur-X / UBL / CII</div><p class="exp-text">Expertise dans les formats normalisés de facturation électronique et leur implémentation technique.</p></div>
+    <div class="exp-item"><span class="exp-icon">🔄</span><div class="exp-title">Intégration ERP</div><p class="exp-text">SAP, Sage, Cegid, Odoo et autres. Connexion fluide entre vos outils existants et la plateforme d'agrément.</p></div>
+    <div class="exp-item"><span class="exp-icon">🗂️</span><div class="exp-title">Gestion de projet</div><p class="exp-text">Pilotage structuré du déploiement, coordination des parties prenantes, respect des délais et des budgets. Méthode éprouvée, jalons clairs.</p></div>
+  </div>
+</section>
+
+<div class="reassurance">
+  <div class="reas-item"><span class="reas-icon">🤲</span><div class="reas-title">Un interlocuteur unique</div><p class="reas-text">Pas de transfert de dossier, pas de rotation d'équipe. Je suis présent du premier appel à la validation finale.</p></div>
+  <div class="reas-item"><span class="reas-icon">💬</span><div class="reas-title">Un langage clair</div><p class="reas-text">Je traduis la complexité réglementaire en actions concrètes et compréhensibles pour vous et vos équipes.</p></div>
+  <div class="reas-item"><span class="reas-icon">📅</span><div class="reas-title">Un plan réaliste</div><p class="reas-text">Des étapes claires, un calendrier tenu, des livrables mesurables. Pas de promesses vagues — des résultats.</p></div>
+</div>
+
+<section class="cta" id="contact">
+  <div>
+    <p class="section-tag">Passons à l'action</p>
+    <h2 class="section-h">Commençons par un <em>diagnostic gratuit</em></h2>
+    <p class="section-p" style="margin-bottom:1.5rem">30 minutes pour évaluer votre situation, identifier vos risques et définir les prochaines étapes. Sans engagement, sans jargon.</p>
+    <p class="section-p">Plus tôt vous commencez, plus sereine sera votre transition. La date butoir du <strong style="color:var(--terra)">1er septembre 2026</strong> approche — ne laissez pas le temps vous faire défaut.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Demande de diagnostic gratuit</h3>
+    <p>Remplissez ce formulaire, je vous réponds sous 24h ouvrées.</p>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Prénom & Nom</label><input type="text" class="form-input" placeholder="Jean Dupont"></div>
+        <div class="form-group"><label class="form-label">Entreprise</label><input type="text" class="form-input" placeholder="Acme SAS"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email professionnel</label><input type="email" class="form-input" placeholder="jean.dupont@entreprise.fr"></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Taille de l'entreprise</label>
+          <select class="form-select"><option>TPE (< 10 salariés)</option><option>PME (10–250)</option><option>ETI (250–5 000)</option><option>Grande entreprise</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Avancement actuel</label>
+          <select class="form-select"><option>Pas encore démarré</option><option>En cours d'évaluation</option><option>Projet lancé</option><option>Déjà en production</option></select>
+        </div>
+      </div>
+      <button class="form-submit">Envoyer ma demande →</button>
+      <div class="privacy-note">🔒 Vos données restent confidentielles — aucun démarchage</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><div class="footer-logo">Expert · Facturation Électronique</div><div class="footer-sub">Consultant indépendant spécialisé réforme e-facture France</div></div>
+  <div class="footer-note">© 2026 · Tous droits réservés</div>
+</footer>
+
+<script>
+function tick() {
+  const diff = new Date('2026-09-01') - new Date();
+  if (diff <= 0) return;
+  document.getElementById('cdD').textContent = String(Math.floor(diff/86400000)).padStart(3,'0');
+  document.getElementById('cdH').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cdM').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cdS').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.tl-item, .offre-card, .exp-item, .reas-item').forEach(el => io.observe(el));
+
+// Classeur tabs
+function switchTab(btn, panelId) {
+  const classeur = btn.closest('.classeur');
+  classeur.querySelectorAll('.classeur-tab').forEach(t => t.classList.remove('active'));
+  classeur.querySelectorAll('.classeur-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+function submitModal() {
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+  setTimeout(closeModal, 4000);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
